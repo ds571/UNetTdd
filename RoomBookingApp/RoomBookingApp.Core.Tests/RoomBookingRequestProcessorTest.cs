@@ -1,15 +1,15 @@
 ﻿using Moq;
 using RoomBookingApp.Core.DataServices;
-using RoomBookingApp.Core.Domain;
 using RoomBookingApp.Core.Enums;
 using RoomBookingApp.Core.Models;
 using RoomBookingApp.Core.Processors;
+using RoomBookingApp.Domain;
 using Shouldly;
 
 namespace RoomBookingApp.Core
 {
     public class RoomBookingRequestProcessorTest
-    {     
+    {
         private readonly RoomBookingRequest _request;
         private readonly List<Room> _availableRooms;
         private readonly RoomBookingRequestProcessor _processor;
@@ -62,7 +62,10 @@ namespace RoomBookingApp.Core
         {
             RoomBooking savedBooking = null;
 
-            // Give me any object as long as it's of type RoomBooking
+            // Setup the mock to call the callback. Expects to receive a call to the "Save"
+            // method with an argument of type "RoomBooking".
+            // The ".Callback<RoomBooking>(booking => savedBooking = booking)" method is
+            // called when the "Save" method is called on the mock object.
             _roomBookingServiceMock.Setup(q => q.Save(It.IsAny<RoomBooking>()))
                 .Callback<RoomBooking>(booking =>
                 {
@@ -95,7 +98,7 @@ namespace RoomBookingApp.Core
         [InlineData(BookingResultFlag.Success, true)]
         public void Should_Return_SuccessOrFailure_Flag_In_Result(BookingResultFlag bookingSuccessFlag, bool isAvailable)
         {
-            if(!isAvailable) _availableRooms.Clear();
+            if (!isAvailable) _availableRooms.Clear();
 
             var result = _processor.BookRoom(_request);
             bookingSuccessFlag.ShouldBe(result.Flag);
@@ -106,7 +109,7 @@ namespace RoomBookingApp.Core
         [InlineData(null, false)]
         public void Should_Return_RoomBookingId_In_Result(int? roomBookingId, bool isAvailable)
         {
-            if(!isAvailable)
+            if (!isAvailable)
             {
                 _availableRooms.Clear();
             }

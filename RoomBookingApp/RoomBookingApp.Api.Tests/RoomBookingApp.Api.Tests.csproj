@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RoomBookingApp.Core\RoomBookingApp.Core.csproj" />
+    <ProjectReference Include="..\RoomBookingApp.Api\RoomBookingApp.Api.csproj" />
   </ItemGroup>
 
 </Project>

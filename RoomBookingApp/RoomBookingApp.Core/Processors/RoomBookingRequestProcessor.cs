@@ -1,11 +1,12 @@
 ﻿using RoomBookingApp.Core.DataServices;
-using RoomBookingApp.Core.Domain;
 using RoomBookingApp.Core.Enums;
 using RoomBookingApp.Core.Models;
+using RoomBookingApp.Domain;
+using RoomBookingApp.Domain.BaseModels;
 
 namespace RoomBookingApp.Core.Processors
 {
-    public class RoomBookingRequestProcessor
+    public class RoomBookingRequestProcessor : IRoomBookingRequestProcessor
     {
         private readonly IRoomBookingService _roomBookingService;
 
@@ -38,7 +39,7 @@ namespace RoomBookingApp.Core.Processors
             }
             else
             {
-                result.Flag|= BookingResultFlag.Failure;
+                result.Flag |= BookingResultFlag.Failure;
             }
             // return CreateRoomBookingObject<RoomBookingResult>(bookingRequest);
             return result;
