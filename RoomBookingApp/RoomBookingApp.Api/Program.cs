@@ -14,7 +14,7 @@ namespace RoomBookingApp.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            /**************** Add services to the container ******************************************/
+            /**************** Add services to the container *****************************************/
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -34,7 +34,7 @@ namespace RoomBookingApp.Api
 
             builder.Services.AddScoped<IRoomBookingService, RoomBookingService>();
             builder.Services.AddScoped<IRoomBookingRequestProcessor, RoomBookingRequestProcessor>();
-            /*****************************************************************************************/
+            /****************************************************************************************/
 
 
             #region Configure
